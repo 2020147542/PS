@@ -7,3 +7,7 @@
 ## 분할 정복
 
 [1629](https://github.com/2020147542/PS/blob/main/1629.py), [1780](https://github.com/2020147542/PS/blob/main/1780.py), [2447](https://github.com/2020147542/PS/blob/main/2447.py), [1992](https://github.com/2020147542/PS/blob/main/1992.py), [1074](https://github.com/2020147542/PS/blob/main/1074.py)
+
+## 다이나믹 프로그래밍
+
+[11726](https://github.com/2020147542/PS/blob/main/11726.py), [2193](https://github.com/2020147542/PS/blob/main/2193.py), [1904](https://github.com/2020147542/PS/blob/main/1904.py), [1463](https://github.com/2020147542/PS/blob/main/1463.py)
