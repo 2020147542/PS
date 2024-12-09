@@ -49,7 +49,7 @@ int main()
     int k = N.length();
     int maxGap = k * 9;
 
-    for (int i = n - maxGap; i < n - 1; i++)
+    for (int i = n - maxGap; i < n; i++)
     {
         int constructor = findConstructor(i);
         if (n == constructor)
@@ -58,6 +58,9 @@ int main()
             break;
         }
     }
+
+    // 생성자가 없는 경우 0을 출력한다.
+    cout << 0 << endl;
 
     return 0;
 }
