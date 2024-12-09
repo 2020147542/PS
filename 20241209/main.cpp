@@ -51,11 +51,10 @@ int main()
 
     for (int i = n - maxGap; i < n; i++)
     {
-        int constructor = findConstructor(i);
-        if (n == constructor)
+        if (n == findConstructor(i))
         {
             cout << i << endl;
-            break;
+            return 0;
         }
     }
 
