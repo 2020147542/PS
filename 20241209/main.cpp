@@ -14,10 +14,50 @@
 
 */
 
-// 1. integer n을 입력 받음
+#include <iostream>
+#include <string>
 
-/*  2. 생성자 구하기
-    n의 자릿수 구하기 = k
-    자릿수의 최대합 = k * 9
-    n - k * 9 부터 n - 1까지 커지면서 구해보기
-*/
+using namespace std;
+
+int findConstructor(int i)
+{
+    string n = to_string(i);
+    int totalSum = i;
+
+    for (int k = 0; k < n.length(); k++)
+    {
+        totalSum += n[k] - '0';
+    }
+
+    return totalSum;
+};
+
+int main()
+{
+
+    string N;
+
+    // 1. string n을 입력 받음
+    cin >> N;
+    int n = stoi(N);
+
+    /*  2. 생성자 구하기
+        n의 자릿수 구하기 = k
+        자릿수의 최대합 = k * 9
+        n - k * 9  부터 n - 1까지 커지면서 구해보기
+    */
+    int k = N.length();
+    int maxGap = k * 9;
+
+    for (int i = n - maxGap; i < n - 1; i++)
+    {
+        int constructor = findConstructor(i);
+        if (n == constructor)
+        {
+            cout << i << endl;
+            break;
+        }
+    }
+
+    return 0;
+}
