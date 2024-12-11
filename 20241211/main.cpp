@@ -11,11 +11,14 @@
 출력 : 정확히 3개의 삼각수 합으로 구성된다면 1, 아니면 0을 테스트 케이스 순서대로 한 줄에 하나씩 출력
 
 풀이시간: 40분(1차만에 성공)
+
+- 2차) unordered_set 사용시 key 저장을 추가로 하면서 메모리를 잡아먹지만, 동시에 조회 속도가 O(1)로 보장된다는 장점이 있음
+- 그치만 1차나 2차 모두 시간은 동일,,,,
 */
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
+#include <unordered_set>
 
 using namespace std;
 
@@ -25,14 +28,14 @@ using namespace std;
  * 가능한 모든 조합을 확인해보고 없다면 0 반환
  * 있다면 바로 1 반환
  */
-int checkIfAnswer(int k, vector<int> list)
+int checkIfAnswer(int k, vector<int> list, unordered_set<int> set)
 {
     for (int i = 0; i < list.size(); i++)
     {
         for (int j = i; j < list.size(); j++)
         {
             int r = k - (list[i] + list[j]);
-            if (find(list.begin(), list.end(), r) != list.end())
+            if (set.find(r) != set.end())
             {
                 return 1;
             }
@@ -64,10 +67,12 @@ int main()
      * 최대 1000이니, 44*45/2 = 990이 최대 값
      */
     vector<int> triList;
+    unordered_set<int> triSet;
     for (int j = 1; j < 45; j++)
     {
         int triValue = j * (j + 1) / 2;
         triList.push_back(triValue);
+        triSet.insert(triValue);
     }
 
     /*
@@ -75,7 +80,7 @@ int main()
      */
     for (int l = 0; l < n; l++)
     {
-        cout << checkIfAnswer(arr[l], triList) << endl;
+        cout << checkIfAnswer(arr[l], triList, triSet) << endl;
     }
 
     return 0;
