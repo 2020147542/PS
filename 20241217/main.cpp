@@ -57,6 +57,7 @@ void find_y(int row)
 // 대각선 존재하는지 확인
 // 경우1) 좌측 상단 ~ 우측 하단 - x와 y 좌표 동일
 // 경우2) 좌측 하단 ~ 우측 상단 - x와 y 좌표 합 4
+// 생각하지 못한 반례) 2,2 일 경우 2가지에 모두 해당
 void find_cross(int position[2])
 {
     if (position[0] == position[1])
@@ -69,7 +70,14 @@ void find_cross(int position[2])
             }
         }
     }
-    else if ((position[0] + position[1]) == (WIDTH - 1))
+    else
+    {
+        return;
+    }
+
+    bingoLine++;
+
+    if ((position[0] + position[1]) == (WIDTH - 1))
     {
         for (int i = 0; i < WIDTH; i++)
         {
