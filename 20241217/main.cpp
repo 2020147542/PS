@@ -55,11 +55,10 @@ void find_y(int row)
 }
 
 // 대각선 존재하는지 확인
-// 경우1) 좌측 상단 ~ 우측 하단 - x와 y 좌표 동일
-// 경우2) 좌측 하단 ~ 우측 상단 - x와 y 좌표 합 4
 // 생각하지 못한 반례) 2,2 일 경우 2가지에 모두 해당
 void find_cross(int position[2])
 {
+    // 경우 1) 좌측 상단 ~ 우측 하단 - x와 y 좌표 동일
     if (position[0] == position[1])
     {
         for (int i = 0; i < WIDTH; i++)
@@ -69,14 +68,11 @@ void find_cross(int position[2])
                 return;
             }
         }
-    }
-    else
-    {
-        return;
+
+        bingoLine++;
     }
 
-    bingoLine++;
-
+    // 경우 2) 좌측 하단 ~ 우측 상단 - x와 y 좌표 합 4
     if ((position[0] + position[1]) == (WIDTH - 1))
     {
         for (int i = 0; i < WIDTH; i++)
@@ -86,13 +82,9 @@ void find_cross(int position[2])
                 return;
             }
         }
-    }
-    else
-    {
-        return;
-    }
 
-    bingoLine++;
+        bingoLine++;
+    }
 }
 
 // 특정 번호의 빙고판 위치 찾기
@@ -146,15 +138,18 @@ int main()
     {
         for (int j = 0; j < WIDTH; j++)
         {
+            // 2-0. 현재 위치
+            int current = i * WIDTH + j + 1;
+
             // 2-1. 위치 찾기
             int position[2] = {0, 0}; // row, col
             checkBingoBoard(said[i][j], position);
 
             // 2-2. 세로줄 있는지 확인
-            find_x(position[1]);
+            find_y(position[0]);
 
             // 2-3. 가로줄 있는지 확인
-            find_y(position[0]);
+            find_x(position[1]);
 
             // 2-4. 대각선 줄 있는지 확인
             find_cross(position);
@@ -163,8 +158,7 @@ int main()
             // 이번 차례에 3이 넘어가도, 이번 차례가 몇번째인지만 출력하면 됨
             if (bingoLine >= 3)
             {
-                cout << i * WIDTH + j + 1 << endl;
-
+                cout << current << endl;
                 return 0;
             }
         }
