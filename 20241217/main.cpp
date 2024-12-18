@@ -27,7 +27,7 @@ int bingoBoard[WIDTH][WIDTH] = {-1};
 int bingoLine = 0;
 
 // 새로선 존재하는지 확인
-void find_x(int col)
+void find_y(int col)
 {
     for (int i = 0; i < WIDTH; i++)
     {
@@ -41,7 +41,7 @@ void find_x(int col)
 }
 
 // 가로선 존재하는지 확인
-void find_y(int row)
+void find_x(int row)
 {
     for (int i = 0; i < WIDTH; i++)
     {
@@ -59,31 +59,33 @@ void find_y(int row)
 void find_cross(int position[2])
 {
     // 경우 1) 좌측 상단 ~ 우측 하단 - x와 y 좌표 동일
+    int rise = 0;
     if (position[0] == position[1])
     {
         for (int i = 0; i < WIDTH; i++)
         {
-            if (bingoBoard[i][i] != 0)
+            if (bingoBoard[i][i] == 0)
             {
-                return;
+                rise++;
             }
         }
 
-        bingoLine++;
+        bingoLine += rise == WIDTH ? 1 : 0;
     }
 
     // 경우 2) 좌측 하단 ~ 우측 상단 - x와 y 좌표 합 4
+    int down = 0;
     if ((position[0] + position[1]) == (WIDTH - 1))
     {
         for (int i = 0; i < WIDTH; i++)
         {
-            if (bingoBoard[(WIDTH - 1) - i][i] != 0)
+            if (bingoBoard[(WIDTH - 1) - i][i] == 0)
             {
-                return;
+                down++;
             }
         }
 
-        bingoLine++;
+        bingoLine += down == WIDTH ? 1 : 0;
     }
 }
 
@@ -134,22 +136,23 @@ int main()
      * 선이 하나라도 발견되면 +1씩 해서 3이 되는 경우의 숫자 return
      * 한 번 갔던 곳은 다시 가지 않으므로, 긋는 선이 겹칠 일은 없음
      */
+    int current = 0;
     for (int i = 0; i < WIDTH; i++)
     {
         for (int j = 0; j < WIDTH; j++)
         {
             // 2-0. 현재 위치
-            int current = i * WIDTH + j + 1;
+            current++;
 
             // 2-1. 위치 찾기
             int position[2] = {0, 0}; // row, col
             checkBingoBoard(said[i][j], position);
 
-            // 2-2. 세로줄 있는지 확인
-            find_y(position[0]);
+            // 2-2. 가로줄 있는지 확인
+            find_x(position[0]);
 
-            // 2-3. 가로줄 있는지 확인
-            find_x(position[1]);
+            // 2-3. 세로줄 있는지 확인
+            find_y(position[1]);
 
             // 2-4. 대각선 줄 있는지 확인
             find_cross(position);
