@@ -22,63 +22,94 @@
 
 using namespace std;
 
-vector<int> days = {0};
-vector<int> pays = {0};
+vector<int> days(1);
+vector<int> pays(1);
+
 int totalPay = 0;
+int N;
 
 // 1일 선택 (3일간) = 비교군 2, 3일
 // 1일에 벌 수 있는 돈 = 10, 포기하는 돈 = 30(일 못하는 2일 + 3일) => 10 - 30 = -20
-// 2일에 벌 수 있는 돈 = 20, 포기하는 돈 = 295(일 못하는 1일 + 3 ~ 7일) => 20 - 295 = -275
+// 2일에 벌 수 있는 돈 = 20, 포기하는 돈 = 295(일 못하는 1일 + 3 ~ 6일) => 20 - 95 = -75
 // 3일에 벌 수 있는 돈 = 10, 포기하는 돈 = 30(일 못하는 1일 + 2일) => 10 - 30 = -20
 // -> 결론은 1과 3중에 가장 빠른 1일 선택
 int beRich(int startDate)
 {
-    int gapDays = days[startDate];
-    int maxIdx = 1;            // 버는 돈이 최대인 날
-    int leastLoss = -INFINITY; // 최소 실패가 언제인지 비교하기 위한 변수
+    cout << endl;
+    int lastDays = startDate + days[startDate];
+    int maxIdx = 0;           // 버는 돈이 최대인 날
+    int maxProfit = -1000000; // 최소 실패가 언제인지 비교하기 위한 변수
+    int sumUntilI = 0;        // i번째 일을 선택함으로써, 벌지못하는 이전 날의 돈 합산
 
-    // 1. 하루 일 경우
-    // 2. N일 넘칠 경우
-
-    for (int i = startDate; i < startDate + gapDays; i++)
+    for (int i = startDate; i < lastDays && i <= N; i++)
     {
-        // 현재 선택지를 골라서 버는 돈
-        int earnMoney = pays[i];
-        // 다른 선택지를 못 골라서 벌지 못하는 돈
-        int lossWithChoice = ;
-        // 이 선택지를 고르므로써, 이후에 벌지 못하는 돈
-        int lossWithDays = ;
+        cout << "선택지 시작: " << i << endl;
 
-        if (leastLoss < earnMoney - (lossWithChoice + lossWithDays))
+        if (i + days[i] - 1 > N)
         {
-            leastLoss = earnMoney - (lossWithChoice + lossWithDays);
-            maxIdx = i;
+            cout << "over" << endl;
+            continue;
         }
+
+        // 이 선택지를 고르므로써, 이후에 벌지 못하는 돈 합산
+        int lossWithChoice = 0;
+        for (int j = i + 1; j < i + days[i]; j++)
+        {
+            lossWithChoice += pays[j];
+        }
+
+        // 현재 선택지를 골라서 버는 돈 - (다른 선택지를 못 골라서 벌지 못하는 돈 + 이후에 벌지 못하는 돈)
+        int currentProfit = pays[i] - (sumUntilI + lossWithChoice);
+
+        cout << i << "일의 총 이익: " << currentProfit << endl;
+
+        if (maxProfit < currentProfit)
+        {
+            maxProfit = currentProfit;
+            maxIdx = i;
+            cout << "maxIdx: " << maxIdx << endl;
+        }
+
+        // 다른 선택지를 포기하면서 벌지 못하는 돈 합산
+        sumUntilI += pays[i];
     }
 
+    // 최종 선택한 선택지 비용 합산
     totalPay += pays[maxIdx];
 
-    return maxIdx;
+    // 최종 선택한 상담이 완료되는데 걸리는 시간 return
+    cout << "선택 일: " << maxIdx << ", 걸리는 시간: " << days[maxIdx] << endl;
+    return days[maxIdx] == 0 ? 0 : days[maxIdx] - 1;
 }
 
 int main()
 {
-
     // 1. 입력 받기
-    int N;
     cin >> N;
 
     for (int i = 1; i < N + 1; i++)
     {
-        cin >> days[i] >> pays[i];
+        int day, pay;
+        cin >> day >> pay;
+
+        if (i + day - 1 > N)
+        {
+            pay = 0;
+        }
+
+        days.push_back(day);
+        pays.push_back(pay);
     }
 
     // 2. 백준이가 얻는 최대 수익 찾기
-    // 하루만에 가능하면 무조건 고르기
     for (int i = 1; i < N + 1; i++)
     {
+        // 다음으로 고려할 상담 날짜로 이동
         i += beRich(i);
     }
+
+    // 3. 출력
+    cout << totalPay << endl;
 
     return 0;
 }
