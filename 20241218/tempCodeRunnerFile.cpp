@@ -70,7 +70,7 @@ int beRich(int startDate)
     // 최종 선택한 선택지 비용 합산
     totalPay += pays[maxIdx];
 
-    // 최종 선택된 '일' + 기간 - 1
+    // 최종 선택된 '일' + 기간 - 1로 넘겨줌
     return maxIdx == 0 ? startDate : (maxIdx + days[maxIdx] - 1);
 }
 
