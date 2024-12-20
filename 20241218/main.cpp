@@ -19,47 +19,35 @@
 
 #include <iostream>
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
-vector<int> days(1);
-vector<int> pays(1);
-vector<int> bestProfit(1);
+vector<int> days;
+vector<int> pays;
 
 int N;
-int chosen = 0;
 
-// 주어진 날의 최대 수익 구하기
-void findBestProfit(int today)
+// 모든 경우의 수 모두 돌기
+// 각 날의 일을 하는 경우 vs 하지 않고, 다른 일을 하는 경우를 모두 고려해서 둘 중 큰 값 저장
+// day_now: 오늘
+// pay_now: 오늘까지 번 돈
+int max_payment(int day_now, int pay_now)
 {
-    const int maxDay = days[today] + today;
-    cout << "today: " << today << endl;
-    cout << "maxDay: " << maxDay << endl;
-    if (maxDay - 1 <= N)
+    if (day_now == N)
     {
-
-        cout << "bestProfit[today]: " << bestProfit[today] << endl;
-        cout << "pays[today]: " << pays[today] << endl;
-        bestProfit[today] = max(bestProfit[today], bestProfit[chosen] + pays[today]);
-        bestProfit[maxDay] = max(bestProfit[maxDay], bestProfit[today] + pays[maxDay]);
-
-        int value = bestProfit[today] - pays[today];
-        cout << "찾을 value: " << value << endl;
-        if (value > 0)
-        {
-            auto chosenPos = find(bestProfit.begin(), bestProfit.begin() + today, value);
-            if (chosenPos != bestProfit.begin() + today)
-            {
-                chosen = chosenPos - bestProfit.begin();
-                cout << "chosen :" << chosen << endl;
-            }
-        }
+        return pay_now; // 마지막 날 - 하루만에 끝낼 수 있는 경우
     }
-    else
+    else if (day_now > N)
     {
-        bestProfit[today] = 0;
+        return -1; // 일을 할 수 없는 경우
     }
+    int day = days[day_now];
+    int pay = pays[day_now];
+
+    int a = max_payment(day_now + day, pay_now + pay); // 현재 일을 선택한 경우
+    int b = max_payment(day_now + 1, pay_now);         // 다른 일을 하는 경우
+
+    return max(a, b);
 }
 
 int main()
@@ -67,26 +55,18 @@ int main()
     // 1. 입력 받기
     cin >> N;
 
-    for (int i = 1; i < N + 1; i++)
+    for (int i = 0; i < N; i++)
     {
         int day, pay;
         cin >> day >> pay;
 
         days.push_back(day);
         pays.push_back(pay);
-        bestProfit.push_back(0);
     }
 
     // 2. 백준이가 얻는 최대 수익 찾기
-    // 오늘 얻을 수 있는 최대 수익은?
-    for (int i = 1; i < N + 1; i++)
-    {
-        findBestProfit(i);
-        cout << bestProfit[i] << endl;
-    }
-
-    // 3. 출력
-    cout << *max_element(bestProfit.begin(), bestProfit.end()) << endl;
+    // 재귀로 접근
+    cout << max_payment(0, 0) << endl;
 
     return 0;
 }
