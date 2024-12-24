@@ -12,10 +12,10 @@
 
 */
 
-#include<iostream>
-#include<vector>
-#include<stack>
-#include<algorithm>
+#include <iostream>
+#include <vector>
+#include <stack>
+#include <algorithm>
 
 using namespace std;
 
@@ -30,7 +30,7 @@ int findNonVisitedNodeIndex(vector<int> &visited, int &N)
     return -1;
 }
 
-void solution(vector<int>& visited, vector<vector<int> >& graph, int start_node)
+void solution(vector<int> &visited, vector<vector<int>> &graph, int start_node)
 {
     stack<int> s;
     s.push(start_node);
@@ -40,41 +40,50 @@ void solution(vector<int>& visited, vector<vector<int> >& graph, int start_node)
         int current = s.top();
         s.pop();
 
-        if (!visited[current]){
+        if (!visited[current])
+        {
             visited[current] = 1;
-        }
 
-        for (int next: graph[current]){
-            if(!visited[next]){
-                s.push(next);
+            for (int next : graph[current])
+            {
+                if (!visited[next])
+                {
+                    s.push(next);
+                }
             }
         }
     }
 }
 
-int main(){
+int main()
+{
 
     int N, M;
     cin >> N >> M;
 
-    vector<vector<int> > graph(N);
+    vector<vector<int>> graph(N);
 
-    for (int i = 0; i < M; i++){
+    for (int i = 0; i < M; i++)
+    {
         int u, v;
         cin >> u >> v;
 
-        graph[u-1].push_back(v-1);
-        graph[v-1].push_back(u-1);
+        graph[u - 1].push_back(v - 1);
+        graph[v - 1].push_back(u - 1);
     }
 
     vector<int> visited(N, 0);
-    
-    for (int con_comp = 0; true; con_comp++){
+
+    for (int con_comp = 0; true; con_comp++)
+    {
         int index = findNonVisitedNodeIndex(visited, N);
 
-        if (index > -1){
+        if (index > -1)
+        {
             solution(visited, graph, index);
-        }else{
+        }
+        else
+        {
             cout << con_comp << endl;
             return 0;
         }
