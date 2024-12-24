@@ -19,6 +19,17 @@
 
 using namespace std;
 
+int findNonVisitedNodeIndex(vector<int> &visited, int &N)
+{
+    for (int idx = 0; idx < N; idx++)
+    {
+        if (!visited[idx])
+            return idx;
+    }
+
+    return -1;
+}
+
 void solution(vector<int>& visited, vector<vector<int> >& graph, int start_node)
 {
     stack<int> s;
@@ -59,15 +70,11 @@ int main(){
     vector<int> visited(N, 0);
     
     for (int con_comp = 0; true; con_comp++){
-        auto visitingPos = find(visited.begin(), visited.end(), 0);
+        int index = findNonVisitedNodeIndex(visited, N);
 
-        if (visitingPos != visited.end())
-        {
-            int index = distance(visited.begin(), visitingPos);
+        if (index > -1){
             solution(visited, graph, index);
-        }
-        else
-        {
+        }else{
             cout << con_comp << endl;
             return 0;
         }
