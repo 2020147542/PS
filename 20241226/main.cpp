@@ -22,7 +22,7 @@ using namespace std;
 
 int N;
 int dx[4] = {0, 0, -1, 1};
-int dy[4] = {1, -1, 0, 0};
+int dy[4] = {-1, 1, 0, 0};
 
 string map[25];
 int visited[25][25] = {0};
