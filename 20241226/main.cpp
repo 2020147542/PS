@@ -24,7 +24,11 @@ int N;
 int dx[4] = {0, 0, -1, 1};
 int dy[4] = {1, -1, 0, 0};
 
-void dfs(int start_row, int start_col, vector<vector<bool> > &visited, vector<string> &map, int &houseNum){
+string map[25];
+int visited[25][25] = {0};
+int houseNum = 0;
+
+void dfs(int start_row, int start_col) {
 
     houseNum++;
     visited[start_row][start_col] = true;
@@ -38,34 +42,14 @@ void dfs(int start_row, int start_col, vector<vector<bool> > &visited, vector<st
         if (map[next_row][next_col] == '0') continue;
         if (visited[next_row][next_col]) continue;
 
-        dfs(next_row, next_col, visited, map, houseNum);
+        dfs(next_row, next_col);
     }
 }
 
-void solution(vector<string> &map, vector<int> &houseNums, int &totalVillage){
+void printOut(vector<int> &houseNums)
+{
 
-    vector<vector<bool> > visited(N, vector<bool>(N, false));
-    int houseNum = 0;
-
-    for (int row = 0; row < N; row++)
-    {
-        for (int col = 0; col < N; col++){
-            
-            if (map[row][col] == '0') continue;
-            if (visited[row][col]) continue;
-
-            houseNum = 0;
-            totalVillage++;
-
-            dfs(row, col, visited, map, houseNum);
-            houseNums.push_back(houseNum);
-        }
-    }
-}
-
-void printOut(vector<int> &houseNums, int &totalVillage){
-
-    cout << totalVillage << endl;
+    cout << houseNums.size() << endl;
 
     sort(houseNums.begin(), houseNums.end());
 
@@ -75,21 +59,33 @@ void printOut(vector<int> &houseNums, int &totalVillage){
     }
 }
 
-int main()
-{
+void solution(vector<int> &houseNums) {
+
+    for (int row = 0; row < N; row++) {
+        for (int col = 0; col < N; col++){
+            
+            if (map[row][col] == '0') continue;
+            if (visited[row][col]) continue;
+
+            houseNum = 0;
+            dfs(row, col);
+            houseNums.push_back(houseNum);
+        }
+    }
+
+    printOut(houseNums);
+}
+
+int main() {
     cin >> N;
 
-    vector<string> map(N);
     for (int i = 0; i < N; i++){
         cin >> map[i];
     }
 
-    int totalVillage = 0;
     vector<int> houseNums;
 
-    solution(map, houseNums, totalVillage);
-
-    printOut(houseNums, totalVillage);
+    solution(houseNums);
 
     return 0;
 }
