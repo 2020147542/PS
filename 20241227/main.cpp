@@ -2,6 +2,7 @@
 
 문제: 1697번 숨바꼭질
 
+- 제한시간: 2초, 128MB
 - 수빈이는 현재 점 N(0 ≤ N ≤ 100,000)에 있고
 - 동생은 점 K(0 ≤ K ≤ 100,000)에 있다
 - 수빈이는 걷거나 순간이동이 가능
@@ -15,22 +16,21 @@
 */
 
 #include <iostream>
-#include <vector>
-#include <algorithm>
+#include <utility>
 #include <queue>
 
 using namespace std;
 
 int N, K;
-int dr[3] = {1, 1, 2};
-int dx[3] = {-1, 1, 0};
+int dr[3] = {2, 1, 1};
+int dx[3] = {0, 1, -1};
 const int MAX_NUM = 100001;
+bool visited[MAX_NUM] = {false};
 
 int solution(int cx)
 {
     int level = 0;
-    vector<bool> visited(MAX_NUM, false);
-    queue<pair<short, int> > q;
+    queue<pair<int, int>> q;
 
     q.push({level, cx});
     visited[cx] = 1;
