@@ -52,5 +52,8 @@
     "variant": "cpp",
     "algorithm": "cpp",
     "unordered_set": "cpp"
+  },
+  "code-runner.executorMap": {
+    "cpp": "cd $dir && clang++ -std=c++17 $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
   }
 }
