@@ -28,20 +28,23 @@ const int MAX_NUM = 100001;
 
 int solution(int cx)
 {
-
     int level = 0;
     vector<bool> visited(MAX_NUM, false);
-    queue<int> q;
+    queue<pair<short, int> > q;
 
-    q.push(cx);
+    q.push({level, cx});
     visited[cx] = 1;
 
     while (!q.empty())
     {
-        int current = q.front();
+        int curLevel = q.front().first;
+        int current = q.front().second;
         q.pop();
 
-        if (current == K) break;
+        if (current == K) {
+            level = curLevel;
+            break;
+        };
 
         for (int i = 0; i < 3; i++)
         {
@@ -49,10 +52,9 @@ int solution(int cx)
             if (nx >= 0 && nx < MAX_NUM && !visited[nx])
             {
                 visited[nx] = 1;
-                q.push(nx);
+                q.push({curLevel + 1, nx});
             }
         }
-
     }
 
     return level;
