@@ -25,7 +25,6 @@ int dr[3] = { 1, 1, 2 };
 int dx[3] = { -1, 1, 0 };
 
 const int maxLength = 100001;
-bool visited[maxLength] = {false};
 
 pair<int, int> solution(int start_node){
 
@@ -33,7 +32,6 @@ pair<int, int> solution(int start_node){
 	int fastestWays = 0;
 	queue<pair<int, int>> q;
 	
-	visited[start_node] = true;
 	q.push({fastestLevel, start_node});
 	
 	while(!q.empty()){
@@ -50,8 +48,7 @@ pair<int, int> solution(int start_node){
 		
 		for(int i = 0; i < 3; i++){
 			int nextNode = dr[i] * curNode + dx[i];
-			if(nextNode >= 0 && nextNode < maxLength && !visited[nextNode]){
-				visited[nextNode] = nextNode != K;
+			if(nextNode >= 0 && nextNode < maxLength){
 				q.push({curLevel + 1, nextNode});
 			}
 		}
