@@ -16,13 +16,11 @@
 
 using namespace std;
 
-long fibo(int n, vector<long> &dp){
+void fibo(int n, vector<long> &dp){
 
     for (int i = 2; i <= n; i++){
         dp[i] = dp[i - 1] + dp[i - 2];
     }
-
-    return dp[n];
 }
 
 int main() {
@@ -33,6 +31,7 @@ int main() {
     dp[0] = 0;
     dp[1] = 1;
 
-    cout << fibo(N, dp) << endl;
+    fibo(N, dp);
+    cout << dp[N] << endl;
     return 0;
 }
