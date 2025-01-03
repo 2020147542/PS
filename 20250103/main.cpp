@@ -25,37 +25,51 @@
 using namespace std;
 
 int N, S, M;
-int maxVol = -1;
 vector<int> vol;
 
-void findMaxVol(int index, int start){
-    if (start == -1) {
-        return;
+int findMaxVol()
+{
+
+    vector<vector<bool>> dp(N + 1, vector<bool>(M + 1, false));
+    dp[0][S] = 1;
+
+    for (int i = 1; i <= N; i++)
+    {
+        for (int res = 0; res <= M; res++)
+        {
+            // i-1번째 볼륨 결과 중 res가 있다면
+            if (dp[i - 1][res])
+            {
+                // down
+                int down = res - vol[i];
+                if (down >= 0) dp[i][down] = true;
+
+                // up
+                int up = res + vol[i];
+                if (up <= M) dp[i][up] = true;
+            }
+        }
     }
 
-    if (index == N + 1) {
-        maxVol = start > maxVol ? start : maxVol;
-        return;
-    };
+    while (M >= 0) {
+        if (dp[N][M]) break;
+        M--;
+    }
 
-    int down = start - vol[index] < 0 ? -1 : start - vol[index];
-    int up = start + vol[index] > M ? -1 : start + vol[index];
-
-    findMaxVol(index + 1, down);
-    findMaxVol(index + 1, up);
+    return M;
 }
 
 int main()
 {
     cin >> N >> S >> M;
 
-    vol.resize(N+1, 0);
-    for (int i = 1; i <= N; i++){
+    vol.resize(N + 1, 0);
+    for (int i = 1; i <= N; i++)
+    {
         cin >> vol[i];
     }
 
-    findMaxVol(1, S);
-    cout << maxVol << endl;
+    cout << findMaxVol() << endl;
 
     return 0;
 }
