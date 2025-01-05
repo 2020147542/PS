@@ -24,48 +24,32 @@ int N;
 vector<int> times;
 vector<int> pays;
 
-// 결국 모든 경우를 다 돌아야함
-// dp = 현재 날짜에 얻을 수 있는 수익들
+// dp = 현재 날짜에 얻을 수 있는 최대 수익
 long solution()
 {
-    vector<vector<long>> dp(N + 1, vector<long>());   // dp는 각 벡터가 빈 상태로 초기화
-    vector<vector<int>> choice(N + 1, vector<int>()); // choice도 각 벡터가 빈 상태로 초기화
+    vector<long> dp(N + 2, 0);
+    long maximum = 0;
 
-    // dp[1]과 choice[1]에만 초기값 할당
-    dp[0].push_back(0);
-    choice[0].push_back(0);
+    for (int day_now = 1; day_now <= N; day_now++)
+    {
+        // 오늘 포함한 경우 -> 오늘 값을 포함한 값을 넘겨줘야함
+        int day_next = day_now + times[day_now];
+        long pay_next = 0;
 
-    for (int today = 1; today <= N; today++) {
-        for (int j = 0; j < dp[today - 1].size(); j++)
-        {
-            int lastchoice = choice[today - 1][j];
-
-            // 오늘 추가
-            if (today >= lastchoice + times[lastchoice])
-            {
-                int cTime = today + times[today];
-                int cPay = dp[today-1][j] + pays[today];
-
-                if (cTime <= N + 1 && find(dp[today].begin(), dp[today].end(), cPay) == dp[today].end())
-                {
-                    choice[today].push_back(today);
-                    dp[today].push_back(cPay);
-                }
-            }
-
-            // 오늘 추가 안 함
-            int tomorrow = today + 1;
-            int tomorrowPay = dp[today - 1][j];
-
-            if (tomorrow <= N + 1 && find(dp[today].begin(), dp[today].end(), tomorrowPay) == dp[today].end())
-            {
-                choice[today].push_back(lastchoice);
-                dp[today].push_back(tomorrowPay);
-            }
+        if (day_next <= N + 1) {
+            pay_next = dp[day_now] + pays[day_now];
+            maximum = max(maximum, pay_next);
+            dp[day_next] = max(pay_next, dp[day_next]);
         }
+
+        // 오늘 아무것도 안한 경우 -> 오늘 값이 포함되지 않은 값을 넘겨줘야함
+        dp[day_now + 1] = max(dp[day_now], dp[day_now + 1]);
+
+        // 오늘 최대값 저장
+        dp[day_now] = maximum;
     }
 
-    return *max_element(dp[N].begin(), dp[N].end());
+    return dp[N];
 }
 
 int main()
@@ -81,7 +65,6 @@ int main()
         cin >> times[i] >> pays[i];
     }
 
-    // 최대 합에 적절한 limit이 없어서 주어진 값으로 구한 Limit 사용시 메모리 오버 남.
     cout << solution() << endl;
 
     return 0;
