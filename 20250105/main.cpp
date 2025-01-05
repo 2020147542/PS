@@ -24,32 +24,31 @@ int N;
 vector<int> times;
 vector<int> pays;
 
-// dp = 현재 날짜에 얻을 수 있는 최대 수익
-long solution()
+// dp = 현재 날짜 직전까지 얻을 수 있는 최대 수익
+// DP[1]이라는 것은 "1일전까지 일을 해서 벌 수 있는 최대 액수"
+// 1일날 일을 함으로써 돈은 3일후인 4일날 받을 수 있다
+// 5일날 벌 수 있는 최대액수 2가지
+// 1. 4일까지 일을 해서 벌 수 있는 최대 액수 + 4일날 일을 함으로써 벌 수 있는 돈   
+// 2. 기존에 설정된 5일까지 일을 해서 벌 수 있는 최대액수
+
+int solution()
 {
-    vector<long> dp(N + 2, 0);
-    long maximum = 0;
+    vector<int> dp(N + 2, 0);
+    int c_max = 0;
 
     for (int day_now = 1; day_now <= N; day_now++)
     {
-        // 오늘 포함한 경우 -> 오늘 값을 포함한 값을 넘겨줘야함
+        // 현재까지 최대값
+        c_max = max(c_max, dp[day_now]);
+
+        // 오늘 일을 하는 경우
         int day_next = day_now + times[day_now];
-        long pay_next = 0;
+        if(day_next > N+1) continue;
 
-        if (day_next <= N + 1) {
-            pay_next = dp[day_now] + pays[day_now];
-            maximum = max(maximum, pay_next);
-            dp[day_next] = max(pay_next, dp[day_next]);
-        }
-
-        // 오늘 아무것도 안한 경우 -> 오늘 값이 포함되지 않은 값을 넘겨줘야함
-        dp[day_now + 1] = max(dp[day_now], dp[day_now + 1]);
-
-        // 오늘 최대값 저장
-        dp[day_now] = maximum;
+        dp[day_next] = max(c_max + pays[day_now], dp[day_next]);
     }
 
-    return dp[N];
+    return dp[N + 1];
 }
 
 int main()
