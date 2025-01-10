@@ -6,15 +6,15 @@
 using namespace std;
 
 int N, K;
-int max_people = 0;
 vector<pair<char, bool>> hamburger;
+
+bool countMax(const pair<char, bool>& p) { return p.first == 'H' && p.second; }
 
 bool canEat(int pos) {
   if (hamburger[pos].first == 'P') return false;
   if (hamburger[pos].second) return false;
 
   hamburger[pos].second = true;
-  max_people += 1;
   return true;
 }
 
@@ -37,6 +37,6 @@ int main() {
     }
   }
 
-  cout << max_people << endl;
+  cout << count_if(hamburger.begin(), hamburger.end(), countMax) << endl;
   return 0;
 }
