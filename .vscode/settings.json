@@ -53,7 +53,9 @@
     "algorithm": "cpp",
     "unordered_set": "cpp",
     "iomanip": "cpp",
-    "set": "cpp"
+    "set": "cpp",
+    "__tree": "cpp",
+    "utility": "cpp"
   },
   "code-runner.executorMap": {
     "cpp": "cd $dir && clang++ -std=c++17 $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
