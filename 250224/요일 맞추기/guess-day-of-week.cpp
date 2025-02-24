@@ -19,8 +19,12 @@ int main() {
         day2 += months[i];
     }
 
-    int idx = (day2 - day1) % 7 + 7;
-    cout << days[idx] << endl;
+    int idx = (day2 - day1) % 7;
+    if(idx < 0){
+        cout << days[idx + 7] << endl;
+    }else{
+        cout << days[idx] << endl;
+    }
 
     return 0;
 }
