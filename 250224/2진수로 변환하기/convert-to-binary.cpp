@@ -9,12 +9,13 @@ int main() {
     cin >> n;
 
     // Write your code here!
-    while(n / 2){
+    while(true){
         r.push(n % 2);
+
+        if(n <= 1) break;
         n = n / 2;
     }
 
-    cout << 1;
     while(!r.empty()){
         cout << r.top();
         r.pop();
