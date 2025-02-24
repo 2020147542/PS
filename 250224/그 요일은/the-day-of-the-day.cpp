@@ -11,7 +11,7 @@ int main(){
     cin >> a;
 
     for(int i = 0; i < 7; i++){
-        if(days[i] == a) break;
+        if(days[i] == a) break; // 월요일부터 +1
         cnt++;
     }
 
@@ -25,11 +25,8 @@ int main(){
         day2 += months[i];
     }
 
-    if(day2 < day1){
-        cout << 0 << endl;
-    }else{
-        cout << (day2 - day1 + 1) / 7 + 1 << endl;
-    }
+    int r = day2 < day1 ? 0 : 1;
+    cout << (day2 - day1) / 7 + r << endl;
 
     return 0;
 }
