@@ -11,11 +11,11 @@ int main(){
     cin >> a;
 
     for(int i = 0; i < 7; i++){
-        cnt++;
         if(days[i] == a) break;
+        cnt++;
     }
 
-    int day1 = d1;
+    int day1 = d1 + cnt;
     for(int i = 0; i <= m1 - 2; i++){
         day1 += months[i]; // 무조건 월요일
     }
@@ -25,7 +25,11 @@ int main(){
         day2 += months[i];
     }
 
-    cout <<  (day2 - day1 + cnt) / 7 << endl;
+    if(day2 < day1){
+        cout << 0 << endl;
+    }else{
+        cout << (day2 - day1 + 1) / 7 + 1 << endl;
+    }
 
     return 0;
 }
