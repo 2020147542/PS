@@ -9,11 +9,10 @@ stack<int> ans;
 int main() {
     cin >> N >> B;
 
-    // Write your code here!
     while(true){
         ans.push(N % B);
 
-        if(N <= 1) break;
+        if(N < B) break;
         N /= B;
     }
 
