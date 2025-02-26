@@ -4,7 +4,6 @@ using namespace std;
 
 int n;
 int x1[100], x2[100];
-int aa, bb = 1000;
 
 int main() {
     cin >> n;
@@ -14,16 +13,17 @@ int main() {
 
     // Please write your code here.
     for (int k = 0; k < n; k++){
+        int aa = -1, bb = 100000;
+
         for (int i = 0; i < n; i++) {
             if(i == k) continue;
-            
             aa = max(aa, x1[i]);
             bb = min(bb, x2[i]);
+        }
 
-            if(aa <= bb){
-                cout << "Yes";
-                return 0;
-            }
+        if(aa <= bb){
+            cout << "Yes";
+            return 0;
         }
     }
 
