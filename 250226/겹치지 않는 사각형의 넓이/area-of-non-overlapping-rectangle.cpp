@@ -13,19 +13,19 @@ int main() {
     cin >> x1[1] >> y1[1] >> x2[1] >> y2[1];
     cin >> x1[2] >> y1[2] >> x2[2] >> y2[2];
 
-    for(int j = y1[0]; j < y2[0]; j++)  {
+    for(int j = y1[0] + 1000; j < y2[0] + 1000; j++)  {
         for(int i = x1[0] + 1000; i < x2[0] + 1000; i++){
             grid[j][i] = 1;
         }
     }
 
-    for(int j = y1[1]; j < y2[1]; j++)  {
+    for(int j = y1[1] + 1000; j < y2[1] + 1000; j++)  {
         for(int i = x1[1] + 1000; i < x2[1] + 1000; i++){
             grid[j][i] = 1;
         }
     }
 
-    for(int j = y1[2]; j < y2[2]; j++)  {
+    for(int j = y1[2] + 1000; j < y2[2] + 1000; j++)  {
         for(int i = x1[2] + 1000; i < x2[2] + 1000; i++){
             grid[j][i] = 0;
         }
