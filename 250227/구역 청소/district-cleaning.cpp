@@ -8,6 +8,11 @@ int line[111];
 int main(){
     cin >> a >> b >> c >> d;
 
-    cout << max(b, d) - min(a, c);
+    if(b < c || d < a){
+        cout << (b-a) + (d-c); 
+    }else{
+        cout << max(b, d) - min(a, c);
+    }
+
     return 0;
 }
