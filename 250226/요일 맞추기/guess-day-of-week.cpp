@@ -35,7 +35,11 @@ int main(){
         }
     }
 
-    cout << days[(cnt % 7) + 7];
+    if(cnt * 7 < 0){
+        cout << days[(cnt % 7) + 7];
+    }else{
+            cout << days[cnt % 7];
+    }
 
     return 0;
 }
