@@ -14,7 +14,7 @@ int main(){
         if(a <= c && d <= b){
             sum = (b - a);
         } else if(c <= a && b <= d){
-            sum = (d - a);
+            sum = (d - c);
         } else{
             // 2. 중간만 겹칠 경우
             if(a <= c && b >= c){ // a c b d
