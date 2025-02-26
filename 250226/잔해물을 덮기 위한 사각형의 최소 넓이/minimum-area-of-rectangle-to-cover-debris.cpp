@@ -7,6 +7,7 @@ int x2[2], y2[2];
 int grid[2111][2111];
 int min_x = 10000, max_x;
 int min_y = 10000, max_y;
+bool isCompleted = true;
 
 int main() {
 
@@ -34,10 +35,17 @@ int main() {
 
                 min_y = min(min_y, j);
                 max_y = max(max_y, j + 1);
+
+                isCompleted = false;
             }
         }
     }
 
-    cout << (max_x - min_x)  * (max_y - min_y);
+    if(isCompleted){
+        cout << 0 << endl;
+    } else{
+        cout << (max_x - min_x)  * (max_y - min_y);
+    }
+
     return 0;
 }
