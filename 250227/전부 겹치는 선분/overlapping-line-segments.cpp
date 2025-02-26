@@ -1,29 +1,32 @@
 #include <iostream>
-
+#include <algorithm>
 using namespace std;
 
 int n;
 int x1[100], x2[100];
 int line[111];
+int aa, bb;
 
 int main() {
     cin >> n;
 
     for (int i = 0; i < n; i++) {
         cin >> x1[i] >> x2[i];
-        for(int j = x1[i]; j <= x2[i]; j++){
-            line[j]++;
+
+        if(i == 0){
+            aa = x1[i];
+            bb = x2[i];
+        }else{
+            if(bb < x1[i] || x2[i] < aa){
+                cout << "No";
+                return 0;
+            } else{
+                aa = max(aa, x1[i]);
+                bb = min(bb, x2[i]);
+            }
         }
     }
 
-    // Please write your code here.
-    for(int i = 0; i < 111; i++){
-        if(line[i] == n) {
-            cout << "Yes";
-            return 0;
-        }
-    }
-
-    cout << "No";
+    cout << "Yes";
     return 0;
 }
