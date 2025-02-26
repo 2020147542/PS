@@ -19,10 +19,11 @@ int main(){
             d1--;
             cnt--;
 
-            if(d1 < 0){
+            if(d1 <= 0){
                 m1--;
-                d1 = 0;
+                d1 = months[m1];
             }
+
         } else{
             d1++;
             cnt++;
@@ -34,7 +35,7 @@ int main(){
         }
     }
 
-    cout << days[cnt % 7 + 7];
+    cout << days[(cnt % 7) + 7];
 
     return 0;
 }
