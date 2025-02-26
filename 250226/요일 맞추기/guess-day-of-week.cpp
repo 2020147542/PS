@@ -30,7 +30,7 @@ int main(){
             
             if(d1 > months[m1]){
                 m1++;
-                d1 = 0;
+                d1 = 1;
             }
         }
     }
@@ -38,7 +38,7 @@ int main(){
     if(cnt * 7 < 0){
         cout << days[(cnt % 7) + 7];
     }else{
-            cout << days[cnt % 7];
+        cout << days[cnt % 7];
     }
 
     return 0;
