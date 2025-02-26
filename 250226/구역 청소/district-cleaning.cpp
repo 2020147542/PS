@@ -7,19 +7,16 @@ int line[111];
 int main(){
     cin >> a >> b >> c >> d;
 
-    for(int i = a; i < b; i++){
-        line[i] = 1;
+    if(b < c || d < a){
+        sum = (b-a) + (d-c);
     }
-
-    for(int i = c; i < d; i++){
-        line[i] = 1;
-    }
-
-    for(int i = 0; i < 111; i++){
-        sum += line[i];
+    else if(d >= a){
+        sum = (a-c) + (d-a) + (b-d);
+    } 
+    else if(b >= c){
+        sum = (c-a) + (d-b) + (b-c);
     }
 
     cout << sum;
-
     return 0;
 }
