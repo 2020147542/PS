@@ -1,0 +1,43 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+int N;
+string seats;
+int max_dist, min_dist = 100000;
+int max_s, max_e, ans;
+
+int main() {
+    cin >> N;
+    cin >> seats;
+
+    // Please write your code here.
+    int s = 0;
+    for(int i = 1; i < N; i++){
+        if(seats[i] == '1'){
+            
+            if(max_dist < i - s){
+                max_s = s;
+                max_e = i;
+                max_dist = i - s;
+            }
+
+            min_dist = min(min_dist, i - s);
+            s = i;
+        }
+    }
+
+    for(int i = max_s + 1; i < max_e; i++){
+        int temp = min(i - max_s, max_e - i);
+        if(ans < temp){
+            seats[ans] = '0';
+            seats[temp] = '1';
+            ans = temp;
+        }
+    }
+
+    cout << min(ans, min_dist);
+    return 0;
+}
