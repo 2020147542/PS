@@ -4,7 +4,6 @@ using namespace std;
 int x, cnt = 1;
 int backDist[11111];
 int speed = 1, dist = 1;
-bool timeToStop;
 
 int main(){
 
@@ -16,9 +15,11 @@ int main(){
 
     while(dist < x){ // 1초에 한번씩 확인
 
-        if(backDist[speed + 1] <= x - dist){
+        int remain = x - dist;
+        if(backDist[speed + 1] <= remain){
             speed++;
-        } else if(speed >= 2){
+        }
+        else if(backDist[speed] > remain && speed >= 2){
             speed--;
         }
 
