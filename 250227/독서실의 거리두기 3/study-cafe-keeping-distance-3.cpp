@@ -17,7 +17,7 @@ int main() {
     int s = 0;
     for(int i = 1; i < N; i++){
         if(seats[i] == '1'){
-            
+
             if(max_dist < i - s){
                 max_s = s;
                 max_e = i;
@@ -30,12 +30,7 @@ int main() {
     }
 
     for(int i = max_s + 1; i < max_e; i++){
-        int temp = min(i - max_s, max_e - i);
-        if(ans < temp){
-            seats[ans] = '0';
-            seats[temp] = '1';
-            ans = temp;
-        }
+        ans = max(ans, min(i - max_s, max_e - i));
     }
 
     cout << min(ans, min_dist);
