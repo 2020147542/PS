@@ -32,19 +32,16 @@ int main(){
     while(true){
         if(check(a, b, c)) break;
 
-        if(a + 1 != b){
-            if(b - a > 2){
-                c = a + 2;
-            }else if(b - a == 2){
-                c = a + 1;
-            }
-        }else{
-            if(c - b > 2){
-                a = b + 2;
-            } else if(c - b == 2){
-                a = b + 1;
-            }
+        if(b - a == 2){
+            c = a + 1;
+        }else if(c - b == 2){
+            a = b + 1;
+        }else if(b - a > 2){
+            c = a + 2;
+        }else if(c - b > 2){
+            a = b + 2;
         }
+
         ans++;
     }
 
