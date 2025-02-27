@@ -2,7 +2,7 @@
 using namespace std;
 
 int x, cnt = 1;
-int backDist[1111];
+int backDist[11111];
 int speed = 1, dist = 1;
 bool timeToStop;
 
