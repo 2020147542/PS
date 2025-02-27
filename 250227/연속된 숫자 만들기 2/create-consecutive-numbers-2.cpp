@@ -2,49 +2,23 @@
 #include <algorithm>
 using namespace std;
 
-int a, b, c;
-int ans;
-
-bool check(int &a, int &b, int &c){
-    int s, m, l;
-
-    s = min({a, b, c});
-    l = max({a, b, c});
-
-    if(c != s && c != l){
-        m = c;
-    }else if(a != s && a != l){
-        m = a;
-    }else if(b != s && b != l){
-        m = b;
-    }
-
-    a = s;
-    b = m;
-    c = l;
-
-    return a + 1 == b && b + 1 == c;
-}
+int a[3];
 
 int main(){
-    cin >> a >> b >> c;
+    cin >> a[0] >> a[1] >> a[2];
 
-    while(true){
-        if(check(a, b, c)) break;
+    sort(a, a + 3);
 
-        if(b - a == 2){
-            c = a + 1;
-        }else if(c - b == 2){
-            a = b + 1;
-        }else if(b - a > 2){
-            c = a + 2;
-        }else if(c - b > 2){
-            a = b + 2;
-        }
-
-        ans++;
+    if(a[0] + 1 == a[1] && a[1] + 1 == a[2]) {
+        cout << 0;
+        return 0;
     }
 
-    cout << ans;
+    if(a[1] - a[0] == 2 || a[2] - a[1] == 2){
+        cout << 1;
+        return 0;
+    }
+
+    cout << 2;
     return 0;
 }
