@@ -14,17 +14,21 @@ int main() {
         cin >> c[i] >> u[i];
     }
 
+    if(u[p-1] == 0){
+        cout << "";
+        return 0;
+    }
+
     for(int i = m - 1; i >= p - 1; i--){
         if(!sus[c[i] - 'A']){
             sus[c[i] - 'A'] = true;
             cnt++;
-        }  
+        }
     }
 
     if(n - cnt > u[p - 1]){
         for(int i = p - 2; i >= 0; i--){
             if(u[i] != u[p-1]) break;
-            
             sus[c[i] - 'A'] = true;
         }
     }
