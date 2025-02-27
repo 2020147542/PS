@@ -10,7 +10,7 @@ int main(){
     cin >> x;
     
     for(int i = 1; i <= x; i++){
-        backDist[i] = backDist[i-1] + i;
+        backDist[i] = backDist[i-1] + i; 
     }
 
     while(dist < x){ // 1초에 한번씩 확인
@@ -19,7 +19,7 @@ int main(){
         if(backDist[speed + 1] <= remain){
             speed++;
         }
-        else if(backDist[speed] > remain && speed >= 2){
+        else if(backDist[speed] > remain){
             speed--;
         }
 
