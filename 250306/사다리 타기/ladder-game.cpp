@@ -25,11 +25,10 @@ void game(int idx, int cnt){
         for(int i = 1; i <= n; i++){
             int now = i;
 
-            for(int d = 1; d <= m; d++){
+            for(int d = 1; d <= 15; d++){
                 if(visited[d][now]) now++;
                 else if(visited[d][now-1]) now--;
             }
-
             result[i] = now;
         }
 
@@ -39,7 +38,6 @@ void game(int idx, int cnt){
         } else if(isSame(result)){
             min_val = min(min_val, cnt);
         }
-        
         return;
     }
 
