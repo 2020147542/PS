@@ -20,6 +20,7 @@ int main() {
     for(int c = 0; c < 100; c++){
         int sum = 0;
         for(int i = c - k; i <= c + k; i++){
+            if(i < 0 || i > 110) continue;
             // 할걸 하자
             // 최대가 되는 사탕의 수를 구하자  
             sum += busket[i];
