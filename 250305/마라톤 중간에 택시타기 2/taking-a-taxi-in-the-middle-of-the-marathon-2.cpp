@@ -22,7 +22,7 @@ int main() {
         int res = 0;
         for(int j = 0; j < n; j++){
             if(i == j) continue;
-            res += abs(curx - x[j]) + abs(cury - y[j]);
+            res += (abs(curx - x[j]) + abs(cury - y[j]));
             curx = x[j];
             cury = y[j];
         }
