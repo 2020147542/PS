@@ -11,10 +11,6 @@ int cnt_h[111];
 int main() {
     // Please write your code here.
     cin >> n;
-    if(n == 1) {
-        cout << 0;
-        return 0;
-    }
 
     for(int i = 0; i < n; i++){
         char y;
@@ -41,7 +37,7 @@ int main() {
             g += cnt_g[end];
             h += cnt_h[end];
 
-            if(g == h){
+            if((g == h) || (g && !h) || (h && !g)){
                 ans = max(ans, end - start);
             }
         }
