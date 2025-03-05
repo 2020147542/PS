@@ -1,10 +1,11 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#include <climits>
 using namespace std;
 typedef pair<int, int> pir;
 
-int n, ans = 10000000000;
+int n, ans = INT_MAX;
 vector<pir> spot;
 
 int main() {
@@ -20,8 +21,8 @@ int main() {
     // 각각의 점을 제외한 모든 경우를 고려함
     for(int i = 0; i < n; i++){
         // i번 점이 빠졌다고 할때, 그외 모든 점들에 대해 커버하는 최소 직사각형 넓이 구하기
-        int Y_MAX = -1000000, Y_MIN = 1000000;
-        int X_MAX = -1000000, X_MIN = 1000000;
+        int Y_MAX = -1, Y_MIN = 50000;
+        int X_MAX = -1, X_MIN = 50000;
 
         for(int j = 0; j < n; j++){
             if(i == j) continue;
