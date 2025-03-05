@@ -20,9 +20,11 @@ int main() {
         // 할거 하기
         // 거리의 최소 구하기 // n-1
         int res = 0;
-        for(int j = 0; j < n; j++){
+        curx = x[0];
+        cury = y[0];
+        for(int j = 1; j < n; j++){
             if(i == j) continue;
-            res += (abs(curx - x[j]) + abs(cury - y[j]));
+            res = res + abs(curx - x[j]) + abs(cury - y[j]);
             curx = x[j];
             cury = y[j];
         }
