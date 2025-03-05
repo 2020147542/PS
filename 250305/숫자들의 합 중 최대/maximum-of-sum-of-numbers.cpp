@@ -9,11 +9,14 @@ int main() {
     cin >> x >> y;
 
     for(int i = x; i <= y; i++){
-        string a = to_string(i);
+        int now = i;
         int sum = 0;
-        for(char ele: a){
-            sum += (ele - '0');
+
+        while(now){
+            sum += (now % 10); 
+            now /= 10;
         }
+
         ans = max(ans, sum);
     }
 
