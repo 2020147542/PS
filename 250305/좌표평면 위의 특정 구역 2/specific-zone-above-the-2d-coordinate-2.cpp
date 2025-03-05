@@ -4,7 +4,7 @@
 using namespace std;
 typedef pair<int, int> pir;
 
-int n, ans = 10000000;
+int n, ans = 10000000000;
 vector<pir> spot;
 
 int main() {
