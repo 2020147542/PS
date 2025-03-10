@@ -11,10 +11,10 @@ vector<int> max_line;
 vector<int> cur_line;
 
 void select(int i, int ncol, int ecol){
-    if(ncol == ecol){
+    if(ncol == ecol || ncol > n){
         int sum = 0;
         int wei = 0;
-    
+
         for(int ele: selected){
             if (sum + ele > c) return;
             sum += ele;
@@ -44,7 +44,8 @@ int main(){
 
     for(int i = 1; i <= n; i++){
         int max_a = INT_MIN, cur_max = INT_MIN;
-        for(int k = 1; k <= n - m + 1; k++){
+
+        for(int k = 1; k < n - m + 1; k++){
             res = INT_MIN;
             selected.clear();
             select(i, k, k+m);
@@ -57,7 +58,7 @@ int main(){
                 select(i, t, t+m);
                 max_b = max(max_b, res);
             }
-            
+
             cur_max = max(cur_max, max_a + max_b);
         }
         max_line.push_back(max_a);
@@ -67,7 +68,7 @@ int main(){
     sort(max_line.rbegin(), max_line.rend());
     sort(cur_line.rbegin(), cur_line.rend());
 
-    if(max_line[0] + max_line[1] >= cur_line[0]){
+    if((max_line[0] + max_line[1]) >= cur_line[0]){
         cout << max_line[0] + max_line[1];
     }else{
         cout << cur_line[0];
