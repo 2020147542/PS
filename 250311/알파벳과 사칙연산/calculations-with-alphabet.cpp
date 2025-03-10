@@ -10,7 +10,6 @@ int ans = INT_MIN, cnt;
 
 int main() {
     // Please write your code here.
-
     for(int a = 1; a <= 4; a++){
         for(int b = 1; b <= 4; b++){
             for(int c = 1; c <= 4; c++){
@@ -30,7 +29,6 @@ int main() {
         int res = numbers[j][line[0]-'a'];
 
         for(int i = 1; i < line.size() - 1; i++){
-    
             if(line[i] == '*'){
                 res *= numbers[j][line[i+1]-'a'];
             }else if(line[i] == '-'){
@@ -43,7 +41,12 @@ int main() {
         }
     }
 
-    cout << ans;
+    if(ans == INT_MIN){
+        cout << 4;
+    }else{
+        cout << ans;
+    }
+    
     
     return 0;
 }
