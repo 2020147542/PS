@@ -28,7 +28,7 @@ int main() {
     for(int j = 0; j < numbers.size(); j++){
         int res = numbers[j][line[0]-'a'];
 
-        for(int i = 1; i < line.size() - 1; i++){
+        for(int i = 1; i < line.size(); i++){
             if(line[i] == '*'){
                 res *= numbers[j][line[i+1]-'a'];
             }else if(line[i] == '-'){
@@ -37,8 +37,9 @@ int main() {
                 res += numbers[j][line[i+1]-'a'];
             }
 
-            ans = max(ans, res);
         }
+        
+        ans = max(ans, res);
     }
 
     if(ans == INT_MIN){
