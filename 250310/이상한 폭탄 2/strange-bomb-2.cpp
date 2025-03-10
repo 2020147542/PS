@@ -21,7 +21,7 @@ int main() {
         }
     }
 
-    if(max_idx == INT_MAX){
+    if(max_idx == INT_MIN){
         cout << -1;
     } else{
         cout << max_idx;
