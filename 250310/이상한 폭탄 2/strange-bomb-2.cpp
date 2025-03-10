@@ -13,8 +13,8 @@ int main() {
     }
 
     for(int i = 0; i < n; i++){
-        for(int j = i - k; j <= i + k; j++){
-            if(j < 0 || i == j || j > n) continue;
+        for(int j = i - k; j < i; j++){
+            if(j < 0) continue;
             if(bombs[i] == bombs[j]){
                 max_idx = max(max_idx, bombs[j]);
             }
