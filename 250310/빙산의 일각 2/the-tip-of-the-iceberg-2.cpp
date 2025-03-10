@@ -4,7 +4,6 @@ using namespace std;
 
 int n;
 int h[111];
-int max_height = INT_MIN;
 int max_val = INT_MIN;
 
 int main() {
@@ -12,10 +11,9 @@ int main() {
     cin >> n;
     for(int i = 1; i <= n; i++){
         cin >> h[i];
-        max_height = max(max_height, h[i]);
     }
     
-    for(int i = 0; i <= max_height; i++){
+    for(int i = 0; i <= 1000; i++){
         int cnt = 0;
 
         for(int j = 1; j <= n; j++){
