@@ -23,14 +23,14 @@ int main() {
         for(int j = s - 1; j <= e - 1; j++){
             arr[j] = 0;
         }
-        
-        for(int j = 0; j < n; j++){
+
+        for(int j = 0; j < arr.size(); j++){
             if(arr[j]) {
                 temp.push_back(arr[j]);
             }
         }
 
-        swap(arr, temp);
+        arr = temp;
     }
 
     cout << arr.size() << "\n";
