@@ -33,6 +33,7 @@ int main() {
 
     for(int i = 0;  i < t; i++){
         set<pir> result;
+        set<pir> remove;
 
         for(auto ele: visited){
             int max_val = INT_MIN;
@@ -49,9 +50,11 @@ int main() {
                 }
             }
 
+            if(remove.count(pir(fr, fc))) continue;
             if(result.count(pir(fr, fc))){
+                remove.insert(pir(fr, fc));
                 result.erase(pir(fr, fc));
-            }else{
+            } else{
                 result.insert(pir(fr, fc));
             }
         }
