@@ -30,7 +30,6 @@ int main() {
             }
         }
 
-        arr.clear();
         swap(arr, temp);
     }
 
