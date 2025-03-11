@@ -20,11 +20,9 @@ void move(int i, int j){
         int nr = dy[k] + i;
         int nc = dx[k] + j;
         
-        if(inRange(nc, nr)){
-            if(arr[nr][nc] > cur){
-                move(nr, nc);
-                return;
-            }
+        if(inRange(nc, nr) && arr[nr][nc] > cur){
+            move(nr, nc);
+            return;
         }
     }
 }
