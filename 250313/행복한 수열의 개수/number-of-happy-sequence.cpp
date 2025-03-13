@@ -14,6 +14,11 @@ int main() {
         }
     }
 
+    if(n == 1) {
+        cout << 2 * n;
+        return 0;
+    }
+
     // 1. 가로 
     for(int i = 0; i < n; i++){
         int now = grid[i][0];
