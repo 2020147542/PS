@@ -2,7 +2,7 @@
 using namespace std;
 
 int n, t;
-int belt[10];
+int belt[700];
 
 int main() {
     // Please write your code here.
