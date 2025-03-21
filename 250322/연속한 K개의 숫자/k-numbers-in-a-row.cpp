@@ -16,7 +16,7 @@ int main() {
         arr[idx] = true;
     }
 
-    for(int i = 1; i <= n - k; i++){
+    for(int i = 1; i <= n - k + 1; i++){
         int cnt = 0; 
         for(int j = 0; j < k; j++){
             if(arr[i+j]) cnt++;
