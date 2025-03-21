@@ -18,9 +18,8 @@ int main() {
         }
     }
 
-    for(int i = 1; i <= n; i++){
-        for(int j = 1; j <= n; j++){
-            if(i - k < 0 || j - k < 0) continue;
+    for(int i = k; i <= n; i++){
+        for(int j = k; j <= n; j++){
             int value = sum[i][j] - sum[i][j-k] - sum[i-k][j] + grid[i-k][j-k];
             max_val = max(max_val, value);
         }
