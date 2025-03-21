@@ -20,7 +20,7 @@ int main() {
 
     for(int i = k; i <= n; i++){
         for(int j = k; j <= n; j++){
-            int value = sum[i][j] - sum[i][j-k] - sum[i-k][j] + grid[i-k][j-k];
+            int value = sum[i][j] - sum[i][j-k] - sum[i-k][j] + sum[i-k][j-k];
             max_val = max(max_val, value);
         }
     }
