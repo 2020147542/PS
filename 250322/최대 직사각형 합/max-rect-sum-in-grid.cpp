@@ -3,9 +3,24 @@
 using namespace std;
 
 int n;
-int max_val = INT_MIN;
+int ans = INT_MIN;
 int grid[310][310];
 int sum[310][310];
+int dp[310];
+
+int getmaxArea(int h1, int h2){
+
+    int res = INT_MIN;
+
+    for(int i = 1; i <= n; i++){
+        // 세로 구간 h1~h2인 열 한 줄짜리 직사각형
+        int value = sum[h2][i] - sum[h1 - 1][i] - sum[h2][i-1] + sum[h1-1][i-1];
+        dp[i] = max(value, dp[i-1] + value); // 새로 시작할 지 or 이어서 갈지
+        res = max(res, dp[i]);
+    }
+
+    return res;
+}
 
 int main() {
     // Please write your code here.
@@ -17,19 +32,13 @@ int main() {
         }
     }
 
-    for(int h = 1; h <= n; h++){
-        for(int w = 1; w <= n; w++){
-            
-            for(int i = h; i <= n; i++){
-                for(int j = w; j <= n; j++){
-                    max_val = max(max_val, sum[i][j] - sum[i-h][j] - sum[i][j-w] + sum[i-h][j-w]);
-                }
-            }
-
+    for(int h1 = 1; h1 <= n; h1++){
+        for(int h2 = h1; h2 <= n; h2++){
+            ans = max(ans, getmaxArea(h1, h2));
         }
     }
 
-    cout << max_val;
+    cout << ans;
 
     return 0;
 }
